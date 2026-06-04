@@ -28,7 +28,44 @@ To formulate a C program to convert a decimal number into its binary equivalent 
 ### Step 8: 
    Stop
 # Program:
+```
+#include <stdio.h>
+
+int main() {
+    int num, rem, i = 0, k;
+    int binary[32];  // Enough to store binary digits of a 32-bit integer
+
+    // Step 4: Read decimal number
+    printf("Enter a decimal number: ");
+    scanf("%d", &num);
+
+    // Edge case: if number is 0
+    if (num == 0) {
+        printf("Binary equivalent: 0\n");
+        return 0;
+    }
+
+    // Step 6: Conversion loop
+    while (num > 0) {
+        rem = num % 2;          // remainder when divided by 2
+        binary[i] = rem;        // store remainder
+        i++;                    // move to next index
+        num = num / 2;          // update number
+    }
+
+    // Step 7: Display binary digits in reverse
+    printf("Binary equivalent: ");
+    for (k = i - 1; k >= 0; k--) {
+        printf("%d", binary[k]);
+    }
+    printf("\n");
+
+    return 0;
+}
+```
 # Output:
+<img width="1346" height="742" alt="image" src="https://github.com/user-attachments/assets/3133e7bc-a82b-4369-a5d2-a4f0124db04d" />
+
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -67,7 +104,79 @@ Thus, the program was implemented and executed successfully, and the required ou
 ### Step 9: 
   Stop
 # Program:
+  ```
+#include <stdio.h>
+
+int main() {
+    int m, i, j, k;
+    int min, max, minCol;
+    int found = 0;
+
+    // Step 4: Read order of matrix
+    printf("Enter the order of the square matrix: ");
+    scanf("%d", &m);
+
+    int a[m][m];
+
+    // Step 5: Read matrix elements
+    printf("Enter the elements of the matrix:\n");
+    for (i = 0; i < m; i++) {
+        for (j = 0; j < m; j++) {
+            scanf("%d", &a[i][j]);
+        }
+    }
+
+    // Step 6: Display the matrix
+    printf("\nThe matrix is:\n");
+    for (i = 0; i < m; i++) {
+        for (j = 0; j < m; j++) {
+            printf("%4d", a[i][j]);
+        }
+        printf("\n");
+    }
+
+    // Step 7: Check each row
+    for (i = 0; i < m; i++) {
+        // Step 7.1: Assume first element is min
+        min = a[i][0];
+        minCol = 0;
+
+        // Step 7.2: Find row minimum
+        for (j = 1; j < m; j++) {
+            if (a[i][j] < min) {
+                min = a[i][j];
+                minCol = j;
+            }
+        }
+
+        // Step 7.4: Assume first element of column is max
+        max = a[0][minCol];
+
+        // Step 7.5: Find column maximum
+        for (k = 1; k < m; k++) {
+            if (a[k][minCol] > max) {
+                max = a[k][minCol];
+            }
+        }
+
+        // Step 8: Check saddle point condition
+        if (min == max) {
+            printf("\nSaddle point found: %d at position (%d, %d)\n", 
+                   min, i, minCol);
+            found = 1;
+        }
+    }
+
+    if (!found) {
+        printf("\nNo saddle point exists in the matrix.\n");
+    }
+
+    return 0;
+}
+```
 # Output:
+<img width="1357" height="750" alt="image" src="https://github.com/user-attachments/assets/b3d3c44a-5761-4ea5-ab9c-48e329c9a18d" />
+
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -101,7 +210,43 @@ Thus, the program was implemented and executed successfully, and the required ou
 ### Step 10: 
   Stop
 # Program:
+```
+#include <stdio.h>
+
+int main() {
+    char s[100], d[100];   // Step 3: Arrays for input and reversed string
+    int i, j, len = 0;
+
+    // Step 4: Read string from user
+    printf("Enter a string: ");
+    scanf("%[^\n]s", s);
+
+    // Step 5: Find length of string
+    while (s[len] != '\0') {
+        len++;
+    }
+
+    // Step 6: Initialize counter j
+    j = 0;
+
+    // Step 7: Copy characters in reverse order
+    for (i = len - 1; i >= 0; i--) {
+        d[j] = s[i];
+        j++;
+    }
+
+    // Step 8: Terminate reversed string
+    d[j] = '\0';
+
+    // Step 9: Print reversed string
+    printf("Reversed string: %s\n", d);
+
+    return 0;
+}
+```
 # Output:
+<img width="1344" height="751" alt="image" src="https://github.com/user-attachments/assets/17860a53-e74a-4318-bc9b-02a2c3459626" />
+
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -135,7 +280,46 @@ Thus, the program was implemented and executed successfully, and the required ou
 ### Step 8:
   Stop
 # Program:
+```
+
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char s[100];                 // Step 3: Input string
+    int visited[256] = {0};      // Step 3: Track visited characters
+    int i, j, n, count;
+
+    // Step 4: Read string
+    printf("Enter a string: ");
+    scanf("%[^\n]", s);
+
+    // Step 5: Find length
+    n = strlen(s);
+
+    // Step 6: Process each character
+    for (i = 0; i < n; i++) {
+        if (visited[(unsigned char)s[i]] == 0) {  // Not yet counted
+            count = 0;
+            for (j = 0; j < n; j++) {
+                if (s[j] == s[i]) {
+                    count++;
+                }
+            }
+            printf("Character '%c' occurs %d times\n", s[i], count);
+            visited[(unsigned char)s[i]] = 1;     // Mark as counted
+        }
+    }
+
+    return 0;
+}
+
 # Output:
+
+<img width="552" height="472" alt="image" src="https://github.com/user-attachments/assets/735d76b3-e870-46be-99ce-3b159a69b00c" />
+
+
+
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -169,7 +353,54 @@ Thus, the program was implemented and executed successfully, and the required ou
 ### Step 8: 
   Stop
 # Program:
+```
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char str[200], words[50][50];
+    int i, j, k = 0, row = 0;
+
+    printf("Enter a string: ");
+    scanf("%[^\n]s", str);
+
+    for (i = 0; str[i] != '\0'; i++) {
+        if (str[i] != ' ') {
+            words[row][k++] = str[i];
+        } else {
+            words[row][k] = '\0';
+            row++;
+            k = 0;
+        }
+    }
+    words[row][k] = '\0'; 
+    row++;
+
+    for (i = 0; i < row; i++) {
+        if (words[i][0] == '\0')
+            continue;
+
+        for (j = i + 1; j < row; j++) {
+            if (strcmp(words[i], words[j]) == 0) {
+                words[j][0] = '\0'; 
+            }
+        }
+    }
+
+    printf("\nString after removing duplicate words:\n");
+    for (i = 0; i < row; i++) {
+        if (words[i][0] != '\0') {
+            printf("%s ", words[i]);
+        }
+    }
+
+    return 0;
+}
+```
 # Output:
+
+<img width="732" height="242" alt="image" src="https://github.com/user-attachments/assets/31ef6c26-abc3-43fb-907b-71b190c46970" />
+
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
